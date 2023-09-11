@@ -1,0 +1,19 @@
+<h1>タスクリスト</h1>
+<form method = "POST" action="/">
+    {% csrf_token %}
+    {{form.title}}
+    <input type = "submit" name = "作成">
+</form>
+{% for task in tasks %}
+    <div>
+        <a href = "{% url 'update_task' task.id %}">アップデート</a>
+        <a href = "{% url 'delete' task.id %}">削除</a>
+
+        {% if task.complete == True %}
+        <strike>{{task}}</strike>
+        {% else %}
+        <span>{{task}}</span>
+        {% endif %}
+        <p>{{task}}</p>
+    </div>
+{% endfor %}
